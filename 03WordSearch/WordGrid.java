@@ -25,20 +25,42 @@ public class WordGrid{
 	}
     }
 
-    public void addWordH(String word, int row, int col){
-	if (row !> rows && col !> cols && col + word.length() < cols){
-	    for(int i = 0;i<word.length();i++){
-		data[row][cols+i] = word.charAt(i);
-	    }
-	}
+    public boolean validValue(int row, int col){
+	if (row >= rows || col >= cols || row < 0 || col < 0) return false;
+	return true;
     }
 
-    public void addWordBwH(String word, int row, int col){
-	if (row !> rows && col !> cols && col - word.length() > 0){
+    public boolean addWordH(String word, int row, int col){
+	if (validValue(row, col) && col + word.length() < cols){
+	    for(int i = 0;i<word.length();i++){
+		data[row][cols+i] = word.charAt(i);
+		return true;
+	    }
+	}
+	return false;
+    }
+
+    public boolean addWordBwH(String word, int row, int col){
+	if (validValue(row, col) && col - word.length() > 0){
 	    for (int i = 0; i<word.length(); i++){ 
 	    data[row][cols - i] = word.charAt(i);
 	    }
+	    return true;
 	}
+	return false;
     }
 
+
+
+
+
+
+
+    public static void main(String[]args){
+	WordGrid test = new WordGrid(10, 10); 
+	test.addWordH("dog", 2, 4);
+	test.toString();
+	test.clear();
+	test.addWordBwH("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 0, 0);
+    }
 }
