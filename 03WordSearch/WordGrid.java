@@ -17,7 +17,7 @@ public class WordGrid{
 	int lineCount = 0;
 	while(s.hasNextLine()){
 	    String line = s.nextLine();
-	    words.add(line);
+	    words.append(line);
 	    lineCount++;
 	}
     }
