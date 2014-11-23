@@ -1,10 +1,25 @@
 import java.util.*; 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class WordGrid{
     private char[][]data;
+    File wordList = new File("words.txt");
+    Scanner s = new Scanner();
+    ArrayList<String> words;
 
     public WordGrid(int rows, int cols){
 	data = new char[rows][cols];
 	clear();
+    }
+
+    public void createWords(File wordList){
+	int lineCount = 0;
+	while(s.hasNextLine()){
+	    String line = s.nextLine();
+	    words.add(line);
+	    lineCount++;
+	}
     }
 
     public void clear(){
