@@ -4,13 +4,17 @@ import java.io.FileNotFoundException;
 
 public class WordGrid{
     private char[][]data;
-    File wordList = new File("words.txt");
-    Scanner s = new Scanner();
-    ArrayList<String> words;
+    private File wordList = new File("words.txt");
+    private Scanner s = new Scanner(wordList);
+    private ArrayList<String> words = new ArrayList<String>;
+    private int rows;
+    private int cols;
 
-    public WordGrid(int rows, int cols){
-	data = new char[rows][cols];
+    public WordGrid(int row, int col){
+	data = new char[row][col];
 	clear();
+	rows = row;
+	cols = col;
     }
 
     public void createWords(File wordList){
@@ -64,12 +68,6 @@ public class WordGrid{
 	}
 	return false;
     }
-
-
-
-
-
-
 
     public static void main(String[]args){
 	WordGrid test = new WordGrid(10, 10); 
