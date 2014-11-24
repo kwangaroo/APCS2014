@@ -52,7 +52,7 @@ public class WordGrid{
     public boolean addWordH(String word, int row, int col){
 	if (validValue(row, col) && col + word.length() < cols){
 	    for(int i = 0;i<word.length();i++){
-		data[row][cols+i] = word.charAt(i);
+		data[row][col+i] = word.charAt(i);
 		return true;
 	    }
 	}
@@ -62,13 +62,34 @@ public class WordGrid{
     public boolean addWordBwH(String word, int row, int col){
 	if (validValue(row, col) && col - word.length() > 0){
 	    for (int i = 0; i<word.length(); i++){ 
-	    data[row][cols - i] = word.charAt(i);
+	    data[row][col - i] = word.charAt(i);
 	    }
 	    return true;
 	}
 	return false;
     }
 
+    public boolean addWordV(String word, int row, int col){
+	if(validValue(row, col) && row + word.length() < cols){
+	    for(int i =0; i<word.length(); i++){
+		data[row+i][col] = word.charAt(i);
+	    }
+	    return true;
+	}
+	return false;
+    }
+
+    public void fillIn(){
+	Random r = new Random();
+	for (int i=0;i<data.length;i++){
+	    for (int j=0;j<data[i].length;j++){
+		if (data[i][j]==' '){
+		    data[i][j]=(char)(r.nextInt((90-65)+1)+65);
+		}
+	    }
+	}
+    }
+		    
     public static void main(String[]args){
 	WordGrid test = new WordGrid(10, 10); 
 	test.addWordH("dog", 2, 4);
