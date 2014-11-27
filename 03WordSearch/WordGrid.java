@@ -49,7 +49,28 @@ public class WordGrid{
 	return true;
     }
 
-    public boolean addWordH(String word, int row, int col){
+    public boolean doesFit(String word, int row, int col, int dx, int dy){
+	int totalXcor = row + word.length() * dx;
+	int totalYcor = col + word.length() * dy;
+	if(totalXcor > 0 && totalXcor < rows && totalYcor < cols && totalYcor > 0){ 
+	    return true;
+	}
+	return false;
+    }
+
+    public boolean addWord(String word, int row, int col, int dx, int dy){
+	if(dx != 0 || dy !=0){
+	    if(validValue(row, col) && doesFit(word, row, col, dx, dy)){
+		for(int i=0; i<word.length();i++){
+		    data[row+(dx*i)][col+(dy*i)] = word.charAt(i);
+		}
+		return true;
+	    }
+	}
+	return false;
+    }
+
+    /*    public boolean addWordH(String word, int row, int col){
 	if (validValue(row, col) && col + word.length() < cols){
 	    for(int i = 0;i<word.length();i++){
 		data[row][col+i] = word.charAt(i);
@@ -78,7 +99,7 @@ public class WordGrid{
 	}
 	return false;
     }
-
+    */
     public void fillIn(){
 	Random r = new Random();
 	for (int i=0;i<data.length;i++){
