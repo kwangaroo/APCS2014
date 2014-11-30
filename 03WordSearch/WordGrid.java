@@ -9,12 +9,18 @@ public class WordGrid{
     private ArrayList<String> words = new ArrayList<String>;
     private int rows;
     private int cols;
+    private Random r = new Random;
+    private boolean answers;
 
-    public WordGrid(int row, int col){
+    public WordGrid(int row, int col, int randomSeed, int answers){
 	data = new char[row][col];
 	clear();
 	rows = row;
 	cols = col;
+	random.setSeed(randomSeed);
+	if(answers == 1){
+	    answers = false;
+	}
     }
 
     public void createWords(File wordList){
@@ -58,9 +64,20 @@ public class WordGrid{
 	return false;
     }
 
+    public boolean isBlank(String word, int row, int col, int dx, int dy){
+	if(doesFit(word, row, col, dx, dy)){
+	    for(int i=word.length();i>0;i--){
+		if(data[row + dx * i][col + dy * i]!=" "){
+		    return false;
+		}
+	    }
+	    return true;
+	}
+    }
+
     public boolean addWord(String word, int row, int col, int dx, int dy){
 	if(dx != 0 || dy !=0){
-	    if(validValue(row, col) && doesFit(word, row, col, dx, dy)){
+	    if(validValue(row, col) && doesFit(word, row, col, dx, dy) && isBlank(word, row, col, dx, dy)){
 		for(int i=0; i<word.length();i++){
 		    data[row+(dx*i)][col+(dy*i)] = word.charAt(i);
 		}
@@ -70,36 +87,6 @@ public class WordGrid{
 	return false;
     }
 
-    /*    public boolean addWordH(String word, int row, int col){
-	if (validValue(row, col) && col + word.length() < cols){
-	    for(int i = 0;i<word.length();i++){
-		data[row][col+i] = word.charAt(i);
-		return true;
-	    }
-	}
-	return false;
-    }
-
-    public boolean addWordBwH(String word, int row, int col){
-	if (validValue(row, col) && col - word.length() > 0){
-	    for (int i = 0; i<word.length(); i++){ 
-	    data[row][col - i] = word.charAt(i);
-	    }
-	    return true;
-	}
-	return false;
-    }
-
-    public boolean addWordV(String word, int row, int col){
-	if(validValue(row, col) && row + word.length() < cols){
-	    for(int i =0; i<word.length(); i++){
-		data[row+i][col] = word.charAt(i);
-	    }
-	    return true;
-	}
-	return false;
-    }
-    */
     public void fillIn(){
 	Random r = new Random();
 	for (int i=0;i<data.length;i++){
