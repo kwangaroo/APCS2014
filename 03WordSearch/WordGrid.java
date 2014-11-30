@@ -11,6 +11,7 @@ public class WordGrid{
     private int cols;
     private Random r = new Random;
     private boolean answers;
+    private ArrayList<String>wordsIn = new ArrayList<String>;
 
     public WordGrid(int row, int col, int randomSeed, int answers){
 	data = new char[row][col];
@@ -20,7 +21,17 @@ public class WordGrid{
 	random.setSeed(randomSeed);
 	if(answers == 1){
 	    answers = false;
+	}else{
+	    answers = true;
 	}
+    }
+
+    public WordGrid(int row, int col){
+	this(row,col,r.nextInt(Integer.MAX_VALUE),0);
+    }
+
+    public void setSeed(int n){
+	r = new Random(n);
     }
 
     public void createWords(File wordList){
@@ -81,18 +92,33 @@ public class WordGrid{
 		for(int i=0; i<word.length();i++){
 		    data[row+(dx*i)][col+(dy*i)] = word.charAt(i);
 		}
+		wordsIn.add(word);
 		return true;
 	    }
 	}
 	return false;
     }
 
+    public String wordsInPuzzle(){
+	String fin = "";
+	for(int i=0;i<wordsIn.length/3;i+=3){
+	    for(int j=0;j<3;j++){
+		fin+=wordsIn[i+j] + "\t";
+	    }
+	    fin+="\n";
+	}
+	return fin;
+    }
+
+
     public void fillIn(){
 	Random r = new Random();
-	for (int i=0;i<data.length;i++){
-	    for (int j=0;j<data[i].length;j++){
-		if (data[i][j]==' '){
-		    data[i][j]=(char)(r.nextInt((90-65)+1)+65);
+	if(answers){
+	    for (int i=0;i<data.length;i++){
+		for (int j=0;j<data[i].length;j++){
+		    if (data[i][j]==' '){
+			data[i][j]=(char)(r.nextInt((90-65)+1)+65);
+		    }
 		}
 	    }
 	}
