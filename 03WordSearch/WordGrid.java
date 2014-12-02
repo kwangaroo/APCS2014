@@ -6,20 +6,20 @@ public class WordGrid{
     private char[][]data;
     private File wordList = new File("words.txt");
     private Scanner s = new Scanner(wordList);
-    private ArrayList<String> words = new ArrayList<String>;
+    private ArrayList<String> words = new ArrayList<String>();
     private int rows;
     private int cols;
-    private Random r = new Random;
+    private Random r = new Random();
     private boolean answers;
-    private ArrayList<String>wordsIn = new ArrayList<String>;
+    private ArrayList<String>wordsIn = new ArrayList<String>();
 
-    public WordGrid(int row, int col, int randomSeed, int answers){
+    public WordGrid(int row, int col, int randomSeed, int ans){
 	data = new char[row][col];
 	clear();
 	rows = row;
 	cols = col;
 	random.setSeed(randomSeed);
-	if(answers == 1){
+	if(ans == 1){
 	    answers = false;
 	}else{
 	    answers = true;
@@ -38,7 +38,7 @@ public class WordGrid{
 	int lineCount = 0;
 	while(s.hasNextLine()){
 	    String line = s.nextLine();
-	    words.append(line);
+	    wordsIn.add(line);
 	    lineCount++;
 	}
     }
@@ -78,7 +78,7 @@ public class WordGrid{
     public boolean isBlank(String word, int row, int col, int dx, int dy){
 	if(doesFit(word, row, col, dx, dy)){
 	    for(int i=word.length();i>0;i--){
-		if(data[row + dx * i][col + dy * i]!=" "){
+		if(data[row + dx * i][col + dy * i]!=' '){
 		    return false;
 		}
 	    }
@@ -101,9 +101,9 @@ public class WordGrid{
 
     public String wordsInPuzzle(){
 	String fin = "";
-	for(int i=0;i<wordsIn.length/3;i+=3){
+	for(int i=0;i<wordsIn.size()/3;i+=3){
 	    for(int j=0;j<3;j++){
-		fin+=wordsIn[i+j] + "\t";
+		fin+=wordsIn.get(i+j) + "\t";
 	    }
 	    fin+="\n";
 	}
@@ -123,12 +123,5 @@ public class WordGrid{
 	    }
 	}
     }
-		    
-    public static void main(String[]args){
-	WordGrid test = new WordGrid(10, 10); 
-	test.addWordH("dog", 2, 4);
-	test.toString();
-	test.clear();
-	test.addWordBwH("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 0, 0);
-    }
+		   
 }
