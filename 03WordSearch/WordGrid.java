@@ -18,7 +18,7 @@ public class WordGrid{
 	clear();
 	rows = row;
 	cols = col;
-	random.setSeed(randomSeed);
+	r.setSeed(randomSeed);
 	if(ans == 1){
 	    answers = false;
 	}else{
@@ -38,7 +38,7 @@ public class WordGrid{
 	int lineCount = 0;
 	while(s.hasNextLine()){
 	    String line = s.nextLine();
-	    wordsIn.add(line);
+	    words.add(line);
 	    lineCount++;
 	}
     }
@@ -99,6 +99,14 @@ public class WordGrid{
 	return false;
     }
 
+    public void loadWords(){
+	createWords(wordList);
+	for(int i=0;i<words.size();i++){
+	    addWord(words.get(i), r.nextInt(rows), r.nextInt(cols), r.nextInt(1)-1, r.nextInt(1)-1);
+	}
+	fillIn();
+    }
+
     public String wordsInPuzzle(){
 	String fin = "";
 	for(int i=0;i<wordsIn.size()/3;i+=3){
@@ -112,7 +120,6 @@ public class WordGrid{
 
 
     public void fillIn(){
-	Random r = new Random();
 	if(answers){
 	    for (int i=0;i<data.length;i++){
 		for (int j=0;j<data[i].length;j++){
@@ -123,5 +130,6 @@ public class WordGrid{
 	    }
 	}
     }
+
 		   
 }
