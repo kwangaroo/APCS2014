@@ -7,7 +7,7 @@ public class WordGrid{
     private ArrayList<String> words = new ArrayList<String>();
     private int rows;
     private int cols;
-    private Random r = new Random();
+    private static Random r = new Random();
     private boolean answers;
     private ArrayList<String>wordsIn = new ArrayList<String>();
 
@@ -32,7 +32,7 @@ public class WordGrid{
 	r = new Random(n);
     }
 
-    public void loadWordsFromFile(String fileName, boolean fillRandomLetters){
+    public void loadWordsFromFile(String fileName, boolean fillRandomLetters) throws FileNotFoundException{
 	File wordList = new File(fileName);
 	Scanner s = new Scanner(wordList);
 	int lineCount = 0;
@@ -89,6 +89,7 @@ public class WordGrid{
 	    }
 	    return true;
 	}
+	return false;
     }
 
     public boolean addWord(String word, int row, int col, int dx, int dy){
