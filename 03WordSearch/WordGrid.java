@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 
 public class WordGrid{
     private char[][]data;
-    private File wordList = new File("words.txt");
-    private Scanner s = new Scanner(wordList);
     private ArrayList<String> words = new ArrayList<String>();
     private int rows;
     private int cols;
@@ -34,12 +32,18 @@ public class WordGrid{
 	r = new Random(n);
     }
 
-    public void createWords(File wordList){
+    public void loadWordsFromFile(String fileName, boolean fillRandomLetters){
+	File wordList = new File(fileName);
+	Scanner s = new Scanner(wordList);
 	int lineCount = 0;
 	while(s.hasNextLine()){
 	    String line = s.nextLine();
 	    words.add(line);
 	    lineCount++;
+	}
+	loadWords();
+	if(fillRandomLetters){
+	    fillIn();
 	}
     }
 
@@ -59,6 +63,7 @@ public class WordGrid{
 	    }
 	    fin+= data[j][rows] + "\n";
 	}
+	return fin;
     }
 
     public boolean validValue(int row, int col){
@@ -100,11 +105,9 @@ public class WordGrid{
     }
 
     public void loadWords(){
-	createWords(wordList);
 	for(int i=0;i<words.size();i++){
 	    addWord(words.get(i), r.nextInt(rows), r.nextInt(cols), r.nextInt(1)-1, r.nextInt(1)-1);
 	}
-	fillIn();
     }
 
     public String wordsInPuzzle(){
@@ -120,12 +123,10 @@ public class WordGrid{
 
 
     public void fillIn(){
-	if(answers){
-	    for (int i=0;i<data.length;i++){
-		for (int j=0;j<data[i].length;j++){
-		    if (data[i][j]==' '){
-			data[i][j]=(char)(r.nextInt((90-65)+1)+65);
-		    }
+	for (int i=0;i<data.length;i++){
+	    for (int j=0;j<data[i].length;j++){
+		if (data[i][j]==' '){
+		    data[i][j]=(char)(r.nextInt((90-65)+1)+65);
 		}
 	    }
 	}
