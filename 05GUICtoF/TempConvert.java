@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class TempConvert extends JFrame implements ActionListener{
     private Container pane;
@@ -34,11 +35,12 @@ public class TempConvert extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
 	int intTemp = Integer.parseInt(num.getText());
-	if (e.getActionCommand.equals("CtF")){
-	    System.out.println(intTemp * 9/5 + 32); 
+	String a = e.getActionCommand();
+	if (a.equals("CtF")){
+	    num.setText(intTemp * 9/5 + 32 + ""); 
 	}
-	if (e.getActionCommand.equals("FtC")){
-	    System.out.println((intTemp - 32) * 5/9);
+	if (a.getActionCommand.equals("FtC")){
+	    num.setText((intTemp - 32) * 5/9);
 	}
     }
 
