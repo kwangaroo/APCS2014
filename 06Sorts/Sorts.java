@@ -5,7 +5,7 @@ public class Sorts{
     	test = a;
     }
     
-    public static void insertionSort() {
+    public static void insertion() {
         for (int i = 1; i < list.length; i++) {
             int next = list[i];
 	    int j = i;
@@ -23,7 +23,7 @@ public class Sorts{
         a[j] = temp;
     }
     
-    public static void selectionSort() {
+    public static void selection() {
         for (int i = 0; i < list.length - 1; i++) {
 	    int min = i;
             for (int j = i + 1; j < list.length; j++) {
@@ -35,7 +35,7 @@ public class Sorts{
         }
     }
     
-    public static void bubbleSort(){
+    public static void bubble(){
         int temp;
         for (int i=0;i<list.length;i++) {
 	    for(int j = 0; j < list.length; j++){
