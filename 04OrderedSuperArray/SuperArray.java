@@ -54,4 +54,26 @@ public class SuperArray{
 	}
 	initial = fin;
     }
+
+    public static void insertionSort() {
+        for (int i = 1; i < initial.length; i++) {
+            String next = initial[i];
+	    int j = i;
+            while (j > 0 && initial[j - 1] > next) {
+                initial[j] = initial[j - 1];
+                j--;
+            }
+	    initial[j] = next;
+        }
+    }
+    
+    public int find(String target){
+	for(int i = 0; i < initial.length(); i++){
+	    if(initial[i].equals(target)){
+		return i; 
+	    }
+	}
+	return -1;
+    }
+
 }
